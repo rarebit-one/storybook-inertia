@@ -41,7 +41,14 @@ jobs:
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: "22"
-          cache: "npm"
+          # No `cache: "npm"` here, deliberately (zizmor cache-poisoning).
+          # This job publishes to npm with OIDC trusted publishing and holds
+          # `id-token: write`, so anything restored from the Actions cache
+          # ends up inside a signed, published package. The cache is writable
+          # from lower-trust contexts on this repo, which makes it a supply
+          # -chain path into the artifact. A release-only job runs rarely
+          # enough that a cold `npm ci` costs seconds; the caching stays on
+          # in ci.yml, where the output is not published.
           registry-url: "https://registry.npmjs.org"
 
       # Node 22 ships npm 10.x, but OIDC Trusted Publishing (token-free publish
