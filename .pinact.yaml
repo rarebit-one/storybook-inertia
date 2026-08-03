@@ -1,0 +1,13 @@
+version: 3
+
+# Matches the config every other repo in the estate carries. Without it,
+# pinact rejects first-party references such as
+# `rarebit-one/.github/.github/workflows/pin-check.yml@main` as "action can't
+# be pinned" -- which would make the pin gate fail on the very file that wires
+# it up. First-party reusables are intentionally tracked by moving ref, not by
+# SHA; only third-party actions must be SHA-pinned.
+ignore_actions:
+  - name: rarebit-one/.*
+    ref: .*
+  - name: \./.*
+    ref: .*
