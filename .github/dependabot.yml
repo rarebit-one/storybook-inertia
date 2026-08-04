@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # GitHub Actions only. Other ecosystems are deliberately out of scope here:
+  # the bundler updater is paused estate-wide (Ruby 4.0 incompatibility), and
+  # adding npm/bundler here would open real dependency churn this rollout is
+  # not scoped to review.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    groups:
+      # One PR per week for all Actions bumps rather than one PR per action.
+      actions:
+        patterns:
+          - "*"
