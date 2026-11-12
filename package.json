@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Storybook mock of @inertiajs/react — render Inertia page components without a backend.",
   "license": "MIT",
-  "author": "rarebit-one",
+  "author": "Rarebit One",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rarebit-one/storybook-inertia.git"
